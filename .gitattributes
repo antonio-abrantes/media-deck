@@ -1,0 +1,4 @@
+# Keep text files LF so Prettier/CI match on Windows and Linux.
+* text=auto eol=lf
+*.{cmd,bat,ps1} text eol=crlf
+*.{png,jpg,jpeg,gif,webp,ico,icns,woff,woff2} binary

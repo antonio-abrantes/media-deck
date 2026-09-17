@@ -187,7 +187,9 @@ describe('MainWindow library', () => {
     });
     expect(within(dialog).getByText('PORTAL-001')).toBeInTheDocument();
     expect(within(dialog).getByText('PROVIDED BY STEAM')).toBeInTheDocument();
-    expect(within(dialog).getByText('FLOPPY DISK GAME SERIES')).toBeInTheDocument();
+    expect(
+      within(dialog).getByText('FLOPPY DISK GAME SERIES'),
+    ).toBeInTheDocument();
   });
 
   it('only fills resolved shortcut fields for explicit review', async () => {

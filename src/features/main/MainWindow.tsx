@@ -117,8 +117,7 @@ export function MainWindow() {
               displayName: details.game.display_name,
               provider: details.game.provider,
               appId: details.game.provider_game_id ?? '',
-              steamLaunchOption:
-                profile.steam_launch_option?.toString() ?? '',
+              steamLaunchOption: profile.steam_launch_option?.toString() ?? '',
               executablePath: profile.executable_path ?? '',
               workingDirectory: profile.working_directory ?? '',
               arguments: profile.arguments.join('\n'),

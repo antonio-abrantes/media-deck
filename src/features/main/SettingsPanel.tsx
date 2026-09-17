@@ -319,11 +319,16 @@ export function SettingsPanel() {
                       )
                     }
                   >
-                    <option value="exact_device" disabled={!device.has_stable_identity}>
+                    <option
+                      value="exact_device"
+                      disabled={!device.has_stable_identity}
+                    >
                       Somente esta unidade física
                     </option>
                     {device.drive_type === 'cd_rom' && (
-                      <option value="any_optical">Qualquer unidade óptica</option>
+                      <option value="any_optical">
+                        Qualquer unidade óptica
+                      </option>
                     )}
                   </select>
                 </label>
@@ -337,9 +342,7 @@ export function SettingsPanel() {
             );
           })}
           {!devices.length && (
-            <p>
-              Nenhuma unidade removível ou óptica elegível foi detectada.
-            </p>
+            <p>Nenhuma unidade removível ou óptica elegível foi detectada.</p>
           )}
         </div>
       </section>

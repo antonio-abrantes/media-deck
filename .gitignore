@@ -11,6 +11,7 @@ Thumbs.db
 .idea/
 .vscode/
 !.vscode/extensions.json
+.cursor/
 
 # Private project documentation. Keep only the public planning documents,
 # the launcher image used by README, and the versioned artwork skill.

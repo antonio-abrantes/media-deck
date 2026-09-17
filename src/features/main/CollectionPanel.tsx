@@ -389,16 +389,11 @@ export function CollectionPanel({
             <CoverFrame
               title={selected.display_name}
               mediaKey={selected.last_media_key}
-              providerBadge={
-                selected.provider === 'steam' ? 'STEAM' : 'LOCAL'
-              }
+              providerBadge={selected.provider === 'steam' ? 'STEAM' : 'LOCAL'}
               coverUrl={selectedCoverSource}
             />
             <footer>
-              <button
-                type="button"
-                onClick={() => setCoverPreviewOpen(false)}
-              >
+              <button type="button" onClick={() => setCoverPreviewOpen(false)}>
                 VOLTAR PARA MEUS JOGOS
               </button>
             </footer>

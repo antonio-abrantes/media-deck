@@ -6,6 +6,19 @@ manifest; the game itself remains installed normally on the computer.
 
 ![MediaDeck launcher loading a physical game](docs/assets/launcher-concept-v1.png)
 
+## Dedication
+
+MediaDeck is dedicated to the original idea behind the **RESET FLOPPY GAME
+SYSTEM**, created and shared by the [Reset](https://resethub.com.br/) YouTube
+channel. Their work showed how a physical floppy can act as a Steam launch key
+with a retro presentation — that spark inspired this project.
+
+- Video: [RESET FLOPPY GAME SYSTEM](https://youtu.be/toXgaU8vSrA)
+- Tutorial article: [Como montar seu próprio RESET FLOPPY GAME SYSTEM](https://resethub.com.br/2026/09/13/como-montar-seu-proprio-reset-floppy-game-system/)
+
+MediaDeck is an independent desktop application. It is not affiliated with or
+endorsed by Reset; credit for the original concept belongs to them.
+
 ## How it works
 
 1. Create a local launch profile for a Steam game or executable.

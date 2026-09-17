@@ -134,7 +134,9 @@ test.describe('main library administration', () => {
     expect(creatorGeometry.roundedPanels).toBe(false);
 
     await page.getByRole('tab', { name: 'SETTINGS' }).click();
-    await expect(page.getByRole('tabpanel', { name: 'Settings' })).toBeVisible();
+    await expect(
+      page.getByRole('tabpanel', { name: 'Settings' }),
+    ).toBeVisible();
     await expect(
       page.getByText('INICIAR O MEDIADECK COM O WINDOWS'),
     ).toBeVisible();

@@ -1,0 +1,20 @@
+@import '@fontsource/michroma/400.css';
+@import '@fontsource/silkscreen/400.css';
+@import '@fontsource/silkscreen/700.css';
+@import '@fontsource/vt323/400.css';
+
+@font-face {
+  font-family: 'Orbitron MediaDeck';
+  font-style: normal;
+  font-weight: 700;
+  font-display: block;
+  src: url('../assets/fonts/orbitron/Orbitron-Bold.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Orbitron MediaDeck';
+  font-style: normal;
+  font-weight: 900;
+  font-display: block;
+  src: url('../assets/fonts/orbitron/Orbitron-Black.woff2') format('woff2');
+}

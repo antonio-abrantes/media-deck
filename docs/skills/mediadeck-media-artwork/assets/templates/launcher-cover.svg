@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1518" height="2076" viewBox="0 0 1518 2076">
+  <title>MediaDeck launcher cover geometry template</title>
+  <g id="guides" fill="none" pointer-events="none">
+    <rect x="0.5" y="0.5" width="1517" height="2075" stroke="#ff3ea5" stroke-width="1"/>
+    <rect x="90" y="90" width="1338" height="1896" stroke="#36f5d0" stroke-width="2" stroke-dasharray="18 12"/>
+  </g>
+</svg>

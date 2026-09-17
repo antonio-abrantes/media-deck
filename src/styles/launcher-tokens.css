@@ -1,0 +1,79 @@
+:root {
+  /* Chassi e estrutura metálica */
+  --chassis-bg-outer: #15181c;
+  --chassis-bg-inner: #1e2227;
+  --chassis-border-outer: #2c323a;
+  --chassis-border-highlight: #3d4550;
+  --chassis-groove: #0d0f12;
+  --chassis-metal: #d8dde3;
+  --chassis-subtitle: #cc7000;
+  --chassis-control: #8a95a5;
+  --chassis-control-close: #ff4d4d;
+  --chassis-control-min: #2bf784;
+
+  /* Displays CRT */
+  --display-screen-bg: #070c09;
+  --display-border: #1a291f;
+
+  /* Fosforo */
+  --phosphor-green: #2bf784;
+  --phosphor-green-bright: #42ff96;
+  --phosphor-green-dim: rgba(43, 247, 132, 0.45);
+  --phosphor-green-glow: rgba(43, 247, 132, 0.6);
+  --phosphor-green-faint: rgba(43, 247, 132, 0.15);
+
+  /* Âmbar */
+  --amber-orange: #ff9900;
+  --amber-orange-bright: #ffad33;
+  --amber-orange-glow: rgba(255, 153, 0, 0.75);
+  --amber-orange-faint: rgba(255, 153, 0, 0.15);
+
+  /* Texto */
+  --text-primary: #e6ebf0;
+  --text-muted: #728091;
+  --text-subtle: #485461;
+
+  --font-brand: 'Michroma', sans-serif;
+  --font-logo: 'Orbitron MediaDeck', 'Orbitron', sans-serif;
+  --font-pixel: 'Silkscreen', monospace;
+  --font-mono: 'VT323', monospace;
+
+  --runtime-width: 865px;
+  --runtime-height: 458px;
+}
+
+.glow-phosphor {
+  color: var(--phosphor-green);
+  text-shadow:
+    0 0 4px var(--phosphor-green-bright),
+    0 0 10px var(--phosphor-green-glow),
+    0 0 20px var(--phosphor-green-faint);
+}
+
+.glow-pixel-title {
+  color: #38ef7d;
+  text-shadow:
+    0 0 5px rgba(56, 239, 125, 0.9),
+    0 0 15px rgba(56, 239, 125, 0.5),
+    0 0 30px rgba(56, 239, 125, 0.2);
+}
+
+.glow-amber {
+  color: var(--amber-orange);
+  text-shadow:
+    0 0 6px var(--amber-orange-bright),
+    0 0 14px var(--amber-orange-glow);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --md-motion: 0;
+  }
+}
+
+html.reduce-motion,
+html.reduce-motion * {
+  animation: none !important;
+  transition: none !important;
+  scroll-behavior: auto !important;
+}

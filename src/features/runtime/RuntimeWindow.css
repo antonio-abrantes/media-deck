@@ -1,0 +1,253 @@
+.runtime-window {
+  width: var(--runtime-width);
+  height: var(--runtime-height);
+  min-height: 0;
+  grid-template-rows: 53px minmax(0, 1fr);
+}
+
+.runtime-window .chassis-header {
+  align-items: center;
+  height: 53px;
+  padding: 8px 15px 3px 43px;
+}
+
+.runtime-window .chassis-brand {
+  gap: 2px;
+}
+
+.runtime-window .chassis-title {
+  color: #dce1e5;
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: 0.006em;
+  line-height: 0.94;
+  -webkit-text-fill-color: #dce1e5;
+  -webkit-text-stroke: 0.25px rgba(245, 247, 248, 0.78);
+  text-shadow:
+    0 1px 0 #8c9399,
+    0 2px 0 #20252a,
+    0 3px 0 #090b0d,
+    0 -1px 0 rgba(255, 255, 255, 0.34);
+  transform: scaleX(1.33) scaleY(1.04);
+  transform-origin: left center;
+}
+
+.runtime-window .chassis-subtitle {
+  color: #ee8319;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.35em;
+  line-height: 1;
+  text-shadow:
+    0 0 5px rgba(238, 131, 25, 0.35),
+    1px 0 rgba(90, 39, 4, 0.65);
+  transform: scaleX(1.1);
+  transform-origin: left center;
+}
+
+.runtime-window .chassis-controls {
+  gap: 5px;
+  padding: 0 2px 0 0;
+}
+
+.runtime-window .chassis-control {
+  width: 30px;
+  height: 27px;
+  color: #d6dadd;
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+}
+
+.runtime-window .chassis-control svg {
+  width: 13px;
+  height: 13px;
+  filter: drop-shadow(0 1px 0 #050607);
+}
+
+.runtime-window .chassis-control--fixed {
+  cursor: default;
+}
+
+.runtime-window .chassis-body {
+  min-height: 0;
+  padding: 3px 9px 9px 17px;
+  background: linear-gradient(180deg, #101419, #0c0f13);
+}
+
+.runtime-layout {
+  display: grid;
+  grid-template-columns: 550px minmax(0, 1fr);
+  grid-template-rows: minmax(0, 1fr) 57px;
+  column-gap: 8px;
+  row-gap: 6px;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+}
+
+.runtime-layout > .boot-terminal {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.runtime-layout > .cover-frame {
+  grid-column: 2;
+  grid-row: 1 / span 2;
+}
+
+.runtime-layout__footer {
+  position: relative;
+  grid-column: 1;
+  grid-row: 2;
+  min-height: 0;
+  padding: 6px 7px;
+  overflow: hidden;
+  background: #6b7680;
+  border: 0;
+  clip-path: polygon(
+    9px 0,
+    calc(100% - 9px) 0,
+    100% 9px,
+    100% calc(100% - 9px),
+    calc(100% - 9px) 100%,
+    9px 100%,
+    0 calc(100% - 9px),
+    0 9px
+  );
+  box-shadow: none;
+}
+
+.runtime-layout__footer::before {
+  content: '';
+  pointer-events: none;
+  position: absolute;
+  z-index: 0;
+  inset: 1px;
+  background: #080b0e;
+  clip-path: polygon(
+    8px 0,
+    calc(100% - 8px) 0,
+    100% 8px,
+    100% calc(100% - 8px),
+    calc(100% - 8px) 100%,
+    8px 100%,
+    0 calc(100% - 8px),
+    0 8px
+  );
+  box-shadow: none;
+}
+
+.runtime-layout__footer::after {
+  content: '';
+  pointer-events: none;
+  position: absolute;
+  z-index: 1;
+  inset: 3px;
+  background: linear-gradient(145deg, #56616b, #222930 18%, #12161b 70%);
+  clip-path: polygon(
+    6px 0,
+    calc(100% - 6px) 0,
+    100% 6px,
+    100% calc(100% - 6px),
+    calc(100% - 6px) 100%,
+    6px 100%,
+    0 calc(100% - 6px),
+    0 6px
+  );
+}
+
+.runtime-layout__footer > .hardware-footer {
+  position: relative;
+  z-index: 2;
+}
+
+.runtime-actions,
+.runtime-recovery,
+.close-decision {
+  margin-top: 12px;
+  padding: 12px 14px;
+  font-family: var(--font-mono);
+  background: rgba(7, 12, 9, 0.94);
+  border: 1px solid var(--display-border);
+  clip-path: polygon(
+    5px 0,
+    100% 0,
+    100% calc(100% - 5px),
+    calc(100% - 5px) 100%,
+    0 100%,
+    0 5px
+  );
+}
+
+.runtime-actions {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.runtime-actions:focus-within {
+  right: 10px;
+  bottom: 10px;
+  z-index: 30;
+  width: auto;
+  height: auto;
+  margin: 0;
+  padding: 6px;
+  overflow: visible;
+  clip: auto;
+  white-space: normal;
+  background: #0b100d;
+  border: 1px solid var(--phosphor-green);
+}
+
+.runtime-actions button,
+.close-decision button {
+  padding: 8px 12px;
+  color: var(--text-primary);
+  cursor: pointer;
+  font-family: var(--font-mono);
+  background: linear-gradient(180deg, #2a323c, #1b222a);
+  border: 1px solid var(--chassis-border-highlight);
+  border-radius: 0;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.runtime-actions button:focus-visible,
+.close-decision button:focus-visible {
+  outline: 2px solid var(--phosphor-green);
+  outline-offset: 2px;
+}
+
+.close-decision__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.close-decision button.danger {
+  color: #ffb4b4;
+  border-color: var(--chassis-control-close);
+}
+
+.runtime-recovery {
+  color: var(--amber-orange);
+}
+
+.close-decision,
+.runtime-recovery {
+  position: absolute;
+  z-index: 29;
+  right: 16px;
+  bottom: 16px;
+  left: 16px;
+  margin: 0;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.72);
+}

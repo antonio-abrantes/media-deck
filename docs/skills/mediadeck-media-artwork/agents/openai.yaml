@@ -1,0 +1,8 @@
+interface:
+  display_name: "MediaDeck Media Artwork"
+  short_description: "Create launcher covers and printable media labels"
+  brand_color: "#2BF784"
+  default_prompt: "Use $mediadeck-media-artwork to create a launcher cover and matching printable media label for this game."
+
+policy:
+  allow_implicit_invocation: true

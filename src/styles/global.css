@@ -1,0 +1,44 @@
+@import './fonts.css';
+@import './launcher-tokens.css';
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  min-width: 320px;
+  min-height: 100%;
+  margin: 0;
+}
+
+body {
+  min-height: 100vh;
+  overflow: hidden;
+  color: var(--text-primary);
+  background: #050607;
+  font-family: var(--font-mono);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+}
+
+html[data-surface='main'],
+html[data-surface='main'] body,
+html[data-surface='main'] #root,
+html[data-surface='runtime'],
+html[data-surface='runtime'] body,
+html[data-surface='runtime'] #root {
+  background: transparent;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+}
+
+button {
+  font: inherit;
+}

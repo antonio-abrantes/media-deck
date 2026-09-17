@@ -1,0 +1,15 @@
+{
+  "$schema": "../gen/schemas/desktop-schema.json",
+  "identifier": "runtime",
+  "description": "Runtime visual frameless com IPC de sessão mínimo.",
+  "local": true,
+  "windows": ["runtime"],
+  "permissions": [
+    "core:window:allow-start-dragging",
+    "core:window:allow-minimize",
+    "core:window:allow-close",
+    "core:event:allow-listen",
+    "core:event:allow-unlisten",
+    "runtime-session"
+  ]
+}

@@ -1,0 +1,83 @@
+{
+  "$schema": "https://schema.tauri.app/config/2",
+  "productName": "MediaDeck",
+  "version": "0.1.0",
+  "identifier": "com.mediadeck.desktop",
+  "build": {
+    "beforeDevCommand": "pnpm dev",
+    "devUrl": "http://127.0.0.1:1420",
+    "beforeBuildCommand": "pnpm build",
+    "frontendDist": "../dist"
+  },
+  "app": {
+    "windows": [
+      {
+        "label": "main",
+        "title": "MediaDeck",
+        "url": "index.html?window=main",
+        "width": 1100,
+        "height": 700,
+        "minWidth": 900,
+        "minHeight": 560,
+        "center": true,
+        "fullscreen": false,
+        "resizable": true,
+        "decorations": false,
+        "transparent": true,
+        "shadow": false
+      },
+      {
+        "label": "runtime",
+        "title": "MediaDeck Runtime",
+        "url": "index.html?window=runtime",
+        "width": 865,
+        "height": 458,
+        "minWidth": 865,
+        "minHeight": 458,
+        "maxWidth": 865,
+        "maxHeight": 458,
+        "center": true,
+        "visible": false,
+        "fullscreen": false,
+        "resizable": false,
+        "decorations": false,
+        "transparent": true,
+        "shadow": false
+      }
+    ],
+    "security": {
+      "csp": "default-src 'self'; connect-src 'self' ipc: http://ipc.localhost; img-src 'self' data: blob:; style-src 'self'; font-src 'self'; script-src 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'none'; form-action 'none'",
+      "devCsp": "default-src 'self'; connect-src 'self' ipc: http://ipc.localhost ws://127.0.0.1:1420; img-src 'self' data: blob:; style-src 'self'; font-src 'self'; script-src 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'none'; form-action 'none'",
+      "capabilities": ["main", "runtime"]
+    }
+  },
+  "plugins": {},
+  "bundle": {
+    "active": true,
+    "targets": ["nsis"],
+    "publisher": "MediaDeck",
+    "category": "Utility",
+    "shortDescription": "Physical media launch keys for Windows PC games.",
+    "longDescription": "MediaDeck turns floppy disks, CDs, and DVDs into collectible launch keys. Media stores only a bounded GAME.INI manifest; games stay installed normally on the PC. Includes tray monitoring, optional per-user autostart, label export, diagnostics, and verified backup.",
+    "copyright": "Copyright © MediaDeck contributors",
+    "icon": [
+      "icons/32x32.png",
+      "icons/128x128.png",
+      "icons/128x128@2x.png",
+      "icons/icon.icns",
+      "icons/icon.ico"
+    ],
+    "windows": {
+      "webviewInstallMode": {
+        "type": "embedBootstrapper",
+        "silent": true
+      },
+      "nsis": {
+        "installMode": "currentUser",
+        "languages": ["English", "PortugueseBR"],
+        "displayLanguageSelector": true,
+        "installerHooks": "./windows/hooks.nsh"
+      }
+    }
+  }
+}

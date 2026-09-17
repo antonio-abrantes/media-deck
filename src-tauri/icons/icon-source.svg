@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title">
+  <title id="title">MediaDeck</title>
+  <defs>
+    <linearGradient id="background" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#14231c" />
+      <stop offset="1" stop-color="#030706" />
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="104" fill="url(#background)" />
+  <rect x="30" y="30" width="452" height="452" rx="82" fill="none" stroke="#315c45" stroke-width="12" />
+  <path d="M118 342V170h46l92 102 92-102h46v172h-56V251l-82 88-82-88v91z" fill="#72f5a9" />
+  <rect x="118" y="374" width="276" height="18" rx="9" fill="#f1a02d" />
+</svg>

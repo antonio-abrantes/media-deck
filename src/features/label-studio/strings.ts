@@ -1,0 +1,15 @@
+export const labelStudioStrings = {
+  moduleName: 'LABEL STUDIO',
+  tools: 'FERRAMENTAS',
+  templates: 'TEMPLATES',
+  layers: 'CAMADAS',
+  properties: 'PROPRIEDADES',
+  save: 'SALVAR',
+  undo: 'DESFAZER',
+  redo: 'REFAZER',
+  projectReady: 'Cena válida e pronta para edição.',
+  browserMode: 'Editor local pronto; persistência requer a janela MediaDeck.',
+  saved: 'Projeto salvo no cache local do MediaDeck.',
+  saveFailed: 'Não foi possível salvar o projeto.',
+  noArtwork: 'Selecione um jogo com artwork em cache.',
+} as const;

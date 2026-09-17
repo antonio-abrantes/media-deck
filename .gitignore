@@ -1,0 +1,26 @@
+node_modules/
+dist/
+coverage/
+playwright-report/
+test-results/
+src-tauri/target/
+src-tauri/gen/
+*.log
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+!.vscode/extensions.json
+
+# Private project documentation. Keep only the public planning documents,
+# the launcher image used by README, and the versioned artwork skill.
+docs/*
+!docs/IMPLEMENTATION_PLAN.md
+!docs/SESSION_HANDOFF.md
+!docs/PRODUCT_SPEC.md
+!docs/CONTRIBUTING.md
+!docs/assets/
+docs/assets/*
+!docs/assets/launcher-concept-v1.png
+!docs/skills/
+!docs/skills/**

@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="70mm" height="52mm" viewBox="0 0 827 614">
+  <title>MediaDeck 3.5-inch floppy label template, 70 by 52 millimetres</title>
+  <metadata>300 PPI target; remove or hide the guides group before export.</metadata>
+  <g id="guides" fill="none" pointer-events="none">
+    <rect x="0.5" y="0.5" width="826" height="613" stroke="#ff3ea5" stroke-width="1"/>
+    <rect x="35" y="35" width="757" height="544" stroke="#36f5d0" stroke-width="2" stroke-dasharray="12 8"/>
+  </g>
+</svg>

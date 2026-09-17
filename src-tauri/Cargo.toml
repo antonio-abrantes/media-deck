@@ -1,0 +1,107 @@
+[package]
+name = "media-deck"
+version = "0.1.0"
+description = "Physical media launch keys for Windows PC games"
+authors = ["MediaDeck contributors"]
+edition = "2021"
+rust-version = "1.85"
+license = "UNLICENSED"
+default-run = "media-deck"
+categories = ["games"]
+keywords = ["mediadeck", "steam", "floppy", "optical", "launcher"]
+
+[lib]
+name = "media_deck_lib"
+crate-type = ["staticlib", "cdylib", "rlib"]
+
+[[bin]]
+name = "process-fixture"
+path = "src/bin/process_fixture.rs"
+required-features = ["process-fixture"]
+
+[features]
+default = []
+# Fixture binary for process-supervisor integration tests only.
+process-fixture = []
+
+[build-dependencies]
+tauri-build = { version = "2", features = [] }
+
+[dependencies]
+tauri = { version = "2", features = ["tray-icon"] }
+tauri-plugin-single-instance = "2"
+
+# IDs estáveis ordenáveis por tempo
+uuid = { version = "1", features = ["v7"] }
+
+# Timestamps UTC e clock injetável
+chrono = { version = "0.4", features = ["serde"] }
+
+# Erros de domínio ergonômicos
+thiserror = "2"
+
+# Serialização de DTOs e payloads
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+
+# Banco SQLite com queries verificadas em compilação
+sqlx = { version = "0.8", features = ["sqlite", "runtime-tokio", "macros", "migrate"] }
+
+# Runtime assíncrono
+tokio = { version = "1", features = ["full"] }
+
+# Logs estruturados
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter", "fmt", "json"] }
+tracing-appender = "0.2"
+
+# Integridade da representação canônica de GAME.INI
+sha2 = "0.10"
+
+# Decodificação limitada e normalização de artwork (sem SVG/animação)
+image = { version = "0.25", default-features = false, features = ["jpeg", "png", "webp"] }
+base64 = "0.22"
+crc32fast = "1"
+flate2 = "1"
+tar = "0.4"
+
+# Parsing estrito de URLs para a política SSRF do adapter opcional
+url = "2"
+
+# Diretórios de dados do usuário (cross-platform; usado apenas como fallback)
+dirs = "5"
+tauri-plugin-dialog = "2.7.3"
+
+# APIs nativas para enumeração de drives e WM_DEVICECHANGE (somente Windows)
+[target.'cfg(windows)'.dependencies]
+winreg = "0.55"
+windows-core = "0.61.2"
+windows = { version = "0.61.3", features = [
+  "Win32_Foundation",
+  "Win32_Graphics_Gdi",
+  "Win32_Security",
+  "Win32_Storage_FileSystem",
+  "Win32_Storage_Imapi",
+  "Win32_System_Diagnostics_ToolHelp",
+  "Win32_System_Com",
+  "Win32_System_Ole",
+  "Win32_System_Power",
+  "Win32_System_Variant",
+  "Win32_System_LibraryLoader",
+  "Win32_System_ProcessStatus",
+  "Win32_System_Threading",
+  "Win32_System_WindowsProgramming",
+  "Win32_UI_Shell",
+  "Win32_UI_WindowsAndMessaging",
+] }
+
+[profile.release]
+codegen-units = 1
+lto = true
+opt-level = "s"
+panic = "abort"
+strip = true
+
+[dev-dependencies]
+tempfile = "3"
+tokio = { version = "1", features = ["full"] }

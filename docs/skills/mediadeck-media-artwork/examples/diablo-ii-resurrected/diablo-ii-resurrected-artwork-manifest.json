@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "game_title": "Diablo II: Resurrected",
+  "provider": "BATTLE.NET",
+  "media_id": "D2R-001",
+  "preset": "floppy_35_label",
+  "cover": {
+    "file": "diablo-ii-resurrected-launcher-cover.png",
+    "width_px": 1518,
+    "height_px": 2076
+  },
+  "print_artwork": {
+    "file": "diablo-ii-resurrected-floppy-35-label.png",
+    "width_mm": 70,
+    "height_mm": 52,
+    "width_px": 827,
+    "height_px": 614,
+    "ppi": 300,
+    "capacity_badge": "COMPRESSED CORE: 1.44 MB"
+  },
+  "art_direction": {
+    "source_material": "Newly generated original dark-gothic artwork; no external image was embedded.",
+    "composition_method": "Each finished piece was generated as one complete composition containing artwork, title, metadata, and its game-derived MediaDeck border; no Canvas or scripted border overlay was used.",
+    "palette": [
+      "blackened iron",
+      "bone ivory",
+      "ember orange",
+      "deep blood red",
+      "ash gray",
+      "cold blue"
+    ]
+  },
+  "sources": [
+    {
+      "url": "https://news.blizzard.com/en-us/article/23679610/diablo-ii-resurrectedtm-the-gates-of-hell-open-september-23",
+      "title": "Diablo II: Resurrected — The Gates of Hell Open September 23",
+      "retrieved_at": "2026-09-16",
+      "role": "title_and_release_reference",
+      "license_or_permission": "Reference only; no source image embedded."
+    },
+    {
+      "url": "https://news.blizzard.com/en-us/article/23725471/diablo-ii-resurrectedtm-launch-guide",
+      "title": "Diablo II: Resurrected Launch Guide",
+      "retrieved_at": "2026-09-16",
+      "role": "pc_provider_reference",
+      "license_or_permission": "Reference only; no source image embedded."
+    }
+  ]
+}

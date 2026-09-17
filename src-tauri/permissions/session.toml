@@ -1,0 +1,195 @@
+[[permission]]
+identifier = "allow-session-get-active"
+description = "Read the public active session snapshot."
+commands.allow = ["session_get_active"]
+
+[[permission]]
+identifier = "allow-settings-get-runtime"
+description = "Read runtime presentation and a11y settings."
+commands.allow = ["settings_get_runtime"]
+
+[[permission]]
+identifier = "allow-runtime-simulate-insert"
+description = "Start the simulated vertical-slice insert sequence."
+commands.allow = ["runtime_simulate_insert"]
+
+[[permission]]
+identifier = "allow-runtime-get-monitor-info"
+description = "Read physical dimensions and scale factor of the runtime monitor."
+commands.allow = ["runtime_get_monitor_info"]
+
+[[permission]]
+identifier = "allow-runtime-get-cover"
+description = "Read only the cached cover associated with the active runtime session."
+commands.allow = [
+  "runtime_get_cover",
+  "runtime_cover_ready",
+  "runtime_animation_ready"
+]
+
+[[permission]]
+identifier = "allow-session-resolve-close"
+description = "Apply wait/detach/force on a close decision."
+commands.allow = ["session_resolve_close"]
+
+[[permission]]
+identifier = "allow-media-validate"
+description = "Validate GAME.INI content without filesystem paths."
+commands.allow = ["media_validate"]
+
+[[permission]]
+identifier = "allow-media-creator-preview"
+description = "Build a canonical GAME.INI preview from persisted IDs."
+commands.allow = ["media_creator_preview"]
+
+[[permission]]
+identifier = "allow-media-creator-export-ini"
+description = "Export a canonical GAME.INI to an explicitly selected local path."
+commands.allow = ["media_creator_export_ini"]
+
+[[permission]]
+identifier = "allow-media-creator-write"
+description = "Write and verify a confirmed profile on an allowlisted device."
+commands.allow = ["media_creator_write"]
+
+[[permission]]
+identifier = "allow-media-import"
+description = "Inspect and explicitly upgrade a legacy profile on an allowlisted device."
+commands.allow = ["media_import_inspect", "media_import_upgrade"]
+
+[[permission]]
+identifier = "allow-media-history"
+description = "List and reverify persisted media records."
+commands.allow = ["media_history_list", "media_history_verify"]
+
+[[permission]]
+identifier = "allow-media-optical"
+description = "Enumerate allowlisted recorders, export ISO, burn, safely cancel and explicitly erase RW media."
+commands.allow = [
+  "media_optical_recorders",
+  "media_optical_export_iso",
+  "media_optical_burn",
+  "media_optical_cancel",
+  "media_optical_erase_challenge",
+  "media_optical_erase"
+]
+
+[[permission]]
+identifier = "allow-device-list"
+description = "List eligible removable/optical drives."
+commands.allow = ["device_list"]
+
+[[permission]]
+identifier = "allow-device-configure"
+description = "Persist device monitor configuration."
+commands.allow = ["device_configure"]
+
+[[permission]]
+identifier = "allow-settings-admin"
+description = "Read administrative settings and explicitly toggle monitoring or Windows autostart."
+commands.allow = [
+  "settings_get_admin",
+  "settings_set_monitor_active",
+  "settings_set_autostart",
+  "settings_list_monitors",
+  "settings_set_launcher_monitor"
+]
+
+[[permission]]
+identifier = "allow-maintenance"
+description = "Export sanitized diagnostics, create verified backups and stage an explicitly selected backup for restore."
+commands.allow = [
+  "maintenance_export_diagnostics",
+  "maintenance_export_backup",
+  "maintenance_stage_restore"
+]
+
+[[permission]]
+identifier = "allow-library-read"
+description = "List and inspect the local game library."
+commands.allow = ["library_list", "library_get"]
+
+[[permission]]
+identifier = "allow-library-scan-steam"
+description = "Run an explicit offline Steam library scan."
+commands.allow = ["library_scan_steam"]
+
+[[permission]]
+identifier = "allow-library-register-executable"
+description = "Register a validated local executable and optional cover."
+commands.allow = ["library_register_executable"]
+
+[[permission]]
+identifier = "allow-library-update-profile"
+description = "Update a persisted launch profile and its local cover."
+commands.allow = ["library_update_profile", "library_set_cover"]
+
+[[permission]]
+identifier = "allow-library-review-shortcut"
+description = "Parse a local Windows shortcut without executing it."
+commands.allow = ["library_review_shortcut"]
+
+[[permission]]
+identifier = "allow-collection-read"
+description = "List and inspect games and covers activated by verified GAME.INI exports."
+commands.allow = ["collection_list", "collection_get", "collection_cover_get"]
+
+[[permission]]
+identifier = "allow-collection-deactivate"
+description = "Remove collection membership without deleting catalog data."
+commands.allow = ["collection_deactivate"]
+
+[[permission]]
+identifier = "allow-label-projects"
+description = "Manage validated Label Studio projects and preview cached artwork."
+commands.allow = [
+  "label_project_list",
+  "label_project_get",
+  "label_project_upsert",
+  "label_project_delete",
+  "label_artwork_list",
+  "label_artwork_get",
+  "label_artwork_import_clipboard",
+  "label_export",
+  "label_calibration_export",
+  "label_thumbnail_get"
+]
+
+[[set]]
+identifier = "runtime-session"
+description = "Runtime vertical-slice session and settings commands."
+permissions = [
+  "allow-session-get-active",
+  "allow-settings-get-runtime",
+  "allow-runtime-simulate-insert",
+  "allow-runtime-get-monitor-info",
+  "allow-runtime-get-cover",
+  "allow-session-resolve-close"
+]
+
+[[set]]
+identifier = "main-admin"
+description = "Administrative device and media validation commands."
+permissions = [
+  "allow-media-validate",
+  "allow-media-creator-preview",
+  "allow-media-creator-export-ini",
+  "allow-media-creator-write",
+  "allow-media-import",
+  "allow-media-history",
+  "allow-media-optical",
+  "allow-device-list",
+  "allow-device-configure",
+  "allow-settings-admin",
+  "allow-maintenance",
+  "allow-library-read",
+  "allow-library-scan-steam",
+  "allow-library-register-executable",
+  "allow-library-update-profile",
+  "allow-library-review-shortcut",
+  "allow-collection-read",
+  "allow-collection-deactivate",
+  "allow-label-projects",
+  "allow-session-get-active",
+  "allow-session-resolve-close"
+]

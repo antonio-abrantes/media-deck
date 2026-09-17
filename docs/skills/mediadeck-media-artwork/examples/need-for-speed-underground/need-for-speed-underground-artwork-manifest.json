@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "game_title": "NEED FOR SPEED: UNDERGROUND",
+  "release_year": 2003,
+  "provider": "EA",
+  "media_id": "NFSU-001",
+  "presets": ["floppy_35_label", "cd_jewel_front"],
+  "cover": {
+    "file": "need-for-speed-underground-launcher-cover.png",
+    "width_px": 1518,
+    "height_px": 2076
+  },
+  "print_artworks": [
+    {
+      "preset": "floppy_35_label",
+      "file": "need-for-speed-underground-floppy-35-label.png",
+      "width_mm": 70,
+      "height_mm": 52,
+      "width_px": 827,
+      "height_px": 614,
+      "ppi": 300,
+      "capacity_badge": "COMPRESSED CORE: 1.44 MB"
+    },
+    {
+      "preset": "cd_jewel_front",
+      "file": "need-for-speed-underground-cd-jewel-front.png",
+      "width_mm": 120,
+      "height_mm": 120,
+      "width_px": 1417,
+      "height_px": 1417,
+      "ppi": 300,
+      "capacity_badge": "OPTICAL CORE: 700 MB"
+    }
+  ],
+  "sources": [
+    {
+      "title": "User-supplied custom floppy-label example",
+      "retrieved_at": "2026-09-16",
+      "role": "style_reference",
+      "license_or_permission": "Supplied in the task for visual analysis; no pixels copied into the generated output"
+    },
+    {
+      "url": "https://www.nfsplanet.com/en/news/1186",
+      "title": "NFS Underground announced — Electronic Arts release information",
+      "retrieved_at": "2026-09-16",
+      "role": "factual_reference",
+      "license_or_permission": "Title, publisher, theme and 2003 release research only; source artwork not embedded"
+    }
+  ],
+  "generation": {
+    "mode": "new artwork from style references",
+    "border_palette": "asphalt black and metallic silver with neon green, electric blue, and violet accents sampled from the game artwork",
+    "normalization": "Minimal centered crop followed by Lanczos resampling to canonical dimensions; print PNG encoded at 300 PPI"
+  }
+}

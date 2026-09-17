@@ -1,0 +1,69 @@
+{
+  "schema_version": 1,
+  "game_title": "DRAGON BALL Z: KAKAROT",
+  "provider": "STEAM",
+  "provider_game_id": "851850",
+  "media_id": "GAME-001",
+  "presets": [
+    "floppy_35_label",
+    "cd_jewel_front",
+    "dvd_case_front"
+  ],
+  "cover": {
+    "file": "dragon-ball-z-kakarot-launcher-cover.png",
+    "width_px": 1518,
+    "height_px": 2076
+  },
+  "print_artworks": [
+    {
+      "preset": "floppy_35_label",
+      "file": "dragon-ball-z-kakarot-floppy-35-label.png",
+      "width_mm": 70,
+      "height_mm": 52,
+      "width_px": 827,
+      "height_px": 614,
+      "ppi": 300,
+      "capacity_badge": "COMPRESSED CORE: 1.44 MB"
+    },
+    {
+      "preset": "cd_jewel_front",
+      "file": "dragon-ball-z-kakarot-cd-jewel-front.png",
+      "width_mm": 120,
+      "height_mm": 120,
+      "width_px": 1417,
+      "height_px": 1417,
+      "ppi": 300,
+      "capacity_badge": "OPTICAL CORE: 700 MB"
+    },
+    {
+      "preset": "dvd_case_front",
+      "file": "dragon-ball-z-kakarot-dvd-case-front.png",
+      "width_mm": 130,
+      "height_mm": 183,
+      "width_px": 1535,
+      "height_px": 2161,
+      "ppi": 300,
+      "capacity_badge": "OPTICAL CORE: 4.70 GB"
+    }
+  ],
+  "sources": [
+    {
+      "title": "User-supplied custom floppy-label examples",
+      "retrieved_at": "2026-09-16",
+      "role": "style_reference",
+      "license_or_permission": "Supplied in the task for visual analysis; no pixels copied into the generated output"
+    },
+    {
+      "url": "https://store.steampowered.com/app/851850/DRAGON_BALL_Z_KAKAROT/",
+      "title": "DRAGON BALL Z: KAKAROT on Steam",
+      "retrieved_at": "2026-09-16",
+      "role": "factual_reference",
+      "license_or_permission": "Title, provider and AppID research only; store artwork not embedded"
+    }
+  ],
+  "generation": {
+    "mode": "new artwork from style references",
+    "border_palette": "red/orange, gold, cyan, and navy sampled from the Kakarot artwork",
+    "normalization": "Minimal centered crop followed by Lanczos resampling to canonical dimensions; print PNG encoded at 300 PPI"
+  }
+}

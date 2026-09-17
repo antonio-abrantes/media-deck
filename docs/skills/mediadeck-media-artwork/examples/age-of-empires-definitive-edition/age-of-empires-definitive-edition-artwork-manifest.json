@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "game_title": "Age of Empires: Definitive Edition",
+  "provider": "STEAM",
+  "provider_game_id": "1017900",
+  "media_id": "AOEDE-001",
+  "preset": "floppy_35_label",
+  "cover": {
+    "file": "age-of-empires-definitive-edition-launcher-cover.png",
+    "width_px": 1518,
+    "height_px": 2076
+  },
+  "print_artwork": {
+    "file": "age-of-empires-definitive-edition-floppy-35-label.png",
+    "width_mm": 70,
+    "height_mm": 52,
+    "width_px": 827,
+    "height_px": 614,
+    "ppi": 300,
+    "capacity_badge": "COMPRESSED CORE: 1.44 MB"
+  },
+  "art_direction": {
+    "source_material": "Newly generated original historical artwork; no external image was embedded.",
+    "composition_method": "Each finished piece was generated as one complete composition containing artwork, title, metadata, and its game-derived MediaDeck border; no Canvas or scripted border overlay was used.",
+    "palette": [
+      "aged bronze",
+      "antique gold",
+      "deep teal",
+      "imperial crimson",
+      "charcoal"
+    ]
+  },
+  "sources": [
+    {
+      "url": "https://www.ageofempires.com/games/aoe",
+      "title": "Age of Empires: Definitive Edition — official game page",
+      "retrieved_at": "2026-09-16",
+      "role": "factual_reference",
+      "license_or_permission": "Reference only; no source image embedded."
+    },
+    {
+      "url": "https://store.steampowered.com/app/1017900/Age_of_Empires_Definitive_Edition/",
+      "title": "Age of Empires: Definitive Edition on Steam",
+      "retrieved_at": "2026-09-16",
+      "role": "provider_id_and_release_reference",
+      "license_or_permission": "Reference only; no source image embedded."
+    }
+  ]
+}

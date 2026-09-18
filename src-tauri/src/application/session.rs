@@ -164,6 +164,98 @@ impl SessionService {
         Ok(outcome)
     }
 
+    /// True while this session still has an in-memory live record.
+    pub fn is_live(&self, session_id: &SessionId) -> bool {
+        self.live
+            .lock()
+            .unwrap()
+            .contains_key(&session_id.to_string())
+    }
+
+    /// Poll until every strongly tracked identity is gone, or the live session ends.
+    ///
+    /// Used after a Bound launch so the runtime window can hide when the player
+    /// quits the game without ejecting media. Unsupervised sessions never enter
+    /// this wait (empty tracked list returns immediately).
+    pub async fn wait_until_tracked_gone(
+        &self,
+        session_id: &SessionId,
+    ) -> Result<(), DomainError> {
+        let poll = Duration::from_millis(500);
+        loop {
+            let tracked = {
+                let live = self.live.lock().unwrap();
+                match live.get(&session_id.to_string()) {
+                    Some(session) => session.tracked.clone(),
+                    None => return Ok(()),
+                }
+            };
+            if tracked.is_empty() {
+                return Ok(());
+            }
+            let mut any_alive = false;
+            for item in &tracked {
+                if self.processes.revalidate(&item.snapshot).await? {
+                    any_alive = true;
+                    break;
+                }
+            }
+            if !any_alive {
+                return Ok(());
+            }
+            tokio::time::sleep(poll).await;
+        }
+    }
+
+    /// Finish a Running Bound session after the game process exited by itself.
+    ///
+    /// Returns `true` when this call owned the completion. Returns `false` when
+    /// the live session is already gone or not in `Running` (e.g. media eject
+    /// took over), so callers must not hide/reset again on a false result.
+    pub async fn complete_after_spontaneous_exit(
+        &self,
+        session_id: &SessionId,
+    ) -> Result<bool, DomainError> {
+        let current = {
+            let live = self.live.lock().unwrap();
+            live.get(&session_id.to_string())
+                .map(|session| session.state.clone())
+        };
+        let Some(state) = current else {
+            return Ok(false);
+        };
+        if !matches!(state, SessionState::Running { .. }) {
+            return Ok(false);
+        }
+        let completed = session::transition(&state, SessionEvent::ProcessExited)?;
+        self.finish_session(session_id, &completed, Some("process_exited"))
+            .await?;
+        Ok(true)
+    }
+
+    /// Drop the in-memory live session without changing persisted close_result.
+    /// Used when media removal already closed the game and reset the runtime.
+    pub fn drop_live(&self, session_id: &SessionId) {
+        self.live.lock().unwrap().remove(&session_id.to_string());
+    }
+
+    #[cfg(test)]
+    pub fn seed_running_for_test(
+        &self,
+        session_id: SessionId,
+        media_key: MediaKey,
+        tracked: Vec<TrackedProcess>,
+    ) {
+        self.live.lock().unwrap().insert(
+            session_id.to_string(),
+            LiveSession {
+                media_key: media_key.clone(),
+                tracked,
+                state: SessionState::Running { media_key },
+            },
+        );
+    }
+
     /// Request graceful close for a tracked session. Empty tracked lists are no-ops.
     pub async fn request_close(
         &self,
@@ -574,5 +666,58 @@ mod tests {
         .unwrap();
         assert_eq!(outcome, LaunchOutcome::Unsupervised);
         assert!(processes.killed_identities().is_empty());
+    }
+
+    #[tokio::test]
+    async fn wait_until_tracked_gone_returns_when_process_disappears() {
+        let processes = FakeProcessPort::default();
+        let snapshot = ProcessSnapshot {
+            pid: 42,
+            creation_time: 7,
+            executable_path: r"D:\Games\Bound.exe".into(),
+        };
+        processes.set_baseline(vec![snapshot.clone()]);
+        let sessions = Arc::new(FakeSessionRepository::default());
+        let service = SessionService::new(Arc::new(processes.clone()), sessions);
+        let session_id = SessionId::new();
+        let media_key = MediaKey::new("DISK-1").unwrap();
+        service.seed_running_for_test(
+            session_id,
+            media_key,
+            vec![TrackedProcess {
+                snapshot,
+                role: ProcessRole::Main,
+                window_handle: Some(1),
+            }],
+        );
+
+        let waiter = {
+            let service = service.clone();
+            tokio::spawn(async move { service.wait_until_tracked_gone(&session_id).await })
+        };
+        tokio::time::sleep(Duration::from_millis(80)).await;
+        processes.set_baseline(Vec::new());
+        waiter.await.unwrap().unwrap();
+        assert!(service
+            .complete_after_spontaneous_exit(&session_id)
+            .await
+            .unwrap());
+        assert!(!service.is_live(&session_id));
+        assert!(!service
+            .complete_after_spontaneous_exit(&session_id)
+            .await
+            .unwrap());
+    }
+
+    #[tokio::test]
+    async fn spontaneous_exit_ignored_when_session_not_running() {
+        let processes = FakeProcessPort::default();
+        let sessions = Arc::new(FakeSessionRepository::default());
+        let service = SessionService::new(Arc::new(processes), sessions);
+        let session_id = SessionId::new();
+        assert!(!service
+            .complete_after_spontaneous_exit(&session_id)
+            .await
+            .unwrap());
     }
 }

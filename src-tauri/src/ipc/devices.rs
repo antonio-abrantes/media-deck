@@ -2,7 +2,7 @@ use crate::application::devices::{
     DeviceEventSink, DeviceService, MediaInsertedEvent, MediaRemovedEvent,
 };
 use crate::application::runtime::RuntimeCoordinator;
-use crate::application::session::{CloseDecision, SessionService};
+use crate::application::session::{CloseDecision, LaunchOutcome, SessionService};
 use crate::domain::entities::{
     DriveType, LaunchKind, LaunchProfile, MediaDevice, MonitorPolicy, SessionId,
 };
@@ -213,13 +213,31 @@ impl<R: Runtime> DeviceEventSink for TauriDeviceEventSink<R> {
                         )
                         .await
                     {
-                        Ok(_) => {
+                        Ok(LaunchOutcome::Bound(_)) => {
+                            if runtime.snapshot().mount_point.as_deref()
+                                == Some(event.mount_point.as_str())
+                            {
+                                let _ = runtime.complete_physical_launch();
+                                spawn_bound_process_exit_watcher(
+                                    app.clone(),
+                                    runtime.clone(),
+                                    sessions.clone(),
+                                    session_id,
+                                    event.mount_point.clone(),
+                                );
+                            } else {
+                                let _ = sessions.request_close(&session_id, 5).await;
+                                sessions.drop_live(&session_id);
+                            }
+                        }
+                        Ok(LaunchOutcome::Unsupervised) => {
                             if runtime.snapshot().mount_point.as_deref()
                                 == Some(event.mount_point.as_str())
                             {
                                 let _ = runtime.complete_physical_launch();
                             } else {
                                 let _ = sessions.request_close(&session_id, 5).await;
+                                sessions.drop_live(&session_id);
                             }
                         }
                         Err(error) => {
@@ -269,7 +287,7 @@ impl<R: Runtime> DeviceEventSink for TauriDeviceEventSink<R> {
             };
             match close_result {
                 Ok(CloseResult::TimedOut) => {
-                    if let Some((session_id, media_key)) = session_identity {
+                    if let Some((session_id, media_key)) = session_identity.clone() {
                         if let Err(error) = sessions
                             .resolve_close(&session_id, &media_key, CloseDecision::Force)
                             .await
@@ -283,12 +301,18 @@ impl<R: Runtime> DeviceEventSink for TauriDeviceEventSink<R> {
                         }
                     }
                     let _ = runtime.reset_after_media_removed();
+                    if let Some((session_id, _)) = &session_identity {
+                        sessions.drop_live(session_id);
+                    }
                     if let Some(window) = app.get_webview_window("runtime") {
                         let _ = window.hide();
                     }
                 }
                 Ok(CloseResult::Exited | CloseResult::AlreadyGone) => {
                     let _ = runtime.reset_after_media_removed();
+                    if let Some((session_id, _)) = &session_identity {
+                        sessions.drop_live(session_id);
+                    }
                     if let Some(window) = app.get_webview_window("runtime") {
                         let _ = window.hide();
                     }
@@ -301,6 +325,54 @@ impl<R: Runtime> DeviceEventSink for TauriDeviceEventSink<R> {
         });
         Ok(())
     }
+}
+
+fn spawn_bound_process_exit_watcher<R: Runtime>(
+    app: AppHandle<R>,
+    runtime: Arc<RuntimeCoordinator>,
+    sessions: Arc<SessionService>,
+    session_id: SessionId,
+    mount_point: String,
+) {
+    tauri::async_runtime::spawn(async move {
+        if let Err(error) = sessions.wait_until_tracked_gone(&session_id).await {
+            tracing::warn!(
+                code = error.code(),
+                session_id = %session_id,
+                "bound process exit watch failed"
+            );
+            return;
+        }
+        match sessions.complete_after_spontaneous_exit(&session_id).await {
+            Ok(true) => {
+                let snapshot = runtime.snapshot();
+                if snapshot.mount_point.as_deref() != Some(mount_point.as_str()) {
+                    return;
+                }
+                if snapshot.session_id.as_deref() != Some(&session_id.to_string()) {
+                    return;
+                }
+                let _ = runtime.reset_after_game_exited();
+                if let Some(window) = app.get_webview_window("runtime") {
+                    let _ = window.hide();
+                }
+                tracing::info!(
+                    session_id = %session_id,
+                    "runtime hidden after bound game process exited"
+                );
+            }
+            Ok(false) => {
+                // Media eject or another owner already cleared the live session.
+            }
+            Err(error) => {
+                tracing::warn!(
+                    code = error.code(),
+                    session_id = %session_id,
+                    "could not complete session after process exit"
+                );
+            }
+        }
+    });
 }
 
 fn reveal_runtime_window<R: Runtime>(window: &tauri::WebviewWindow<R>) {

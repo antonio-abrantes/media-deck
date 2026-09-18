@@ -487,6 +487,27 @@ impl RuntimeCoordinator {
         Ok(snapshot)
     }
 
+    /// Hide the runtime presentation after a Bound game process exits on its own.
+    /// Media may still be in the drive; the next play requires eject + reinsert.
+    pub fn reset_after_game_exited(&self) -> Result<SessionSnapshotDto, DomainError> {
+        let current = self.inner.lock().unwrap().state.clone();
+        if matches!(current, SessionState::Running { .. }) {
+            let _ = self.apply(SessionEvent::ProcessExited, |snap| {
+                snap.progress_caption = "GAME SESSION ENDED".into();
+            });
+        }
+        let snapshot = {
+            let mut guard = self.inner.lock().unwrap();
+            guard.state = SessionState::Idle;
+            guard.snapshot = SessionSnapshotDto::default();
+            guard.cover_rendered = false;
+            guard.animation_rendered = false;
+            guard.snapshot.clone()
+        };
+        self.sink.state_changed(&snapshot)?;
+        Ok(snapshot)
+    }
+
     pub fn mark_close_decision(&self) -> Result<SessionSnapshotDto, DomainError> {
         let media_key = {
             let guard = self.inner.lock().unwrap();

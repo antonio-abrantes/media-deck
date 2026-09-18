@@ -447,11 +447,11 @@ impl DDiscFormat2DataEvents_Impl for BurnEvents_Impl {
         let total = unsafe { args.TotalTime()? }.max(0) as u32;
         let remaining = unsafe { args.RemainingTime()? }.max(0) as u32;
         let safe = cancellation_safe(action);
-        let percent = if total == 0 {
-            0
-        } else {
-            ((elapsed.saturating_mul(100) / total).min(100)) as u8
-        };
+        let percent = elapsed
+            .saturating_mul(100)
+            .checked_div(total)
+            .unwrap_or(0)
+            .min(100) as u8;
         (self.progress)(progress_value(
             phase(action),
             percent,

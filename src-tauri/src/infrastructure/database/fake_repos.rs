@@ -192,7 +192,7 @@ impl ActivationRepository for FakeActivationRepository {
     fn list(&self) -> PortResult<'_, Vec<GameActivation>> {
         Box::pin(async move {
             let mut values: Vec<_> = self.inner.lock().unwrap().values().cloned().collect();
-            values.sort_by(|left, right| right.last_exported_at.cmp(&left.last_exported_at));
+            values.sort_by_key(|left| std::cmp::Reverse(left.last_exported_at));
             Ok(values)
         })
     }

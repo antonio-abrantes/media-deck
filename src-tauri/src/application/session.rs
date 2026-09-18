@@ -177,10 +177,7 @@ impl SessionService {
     /// Used after a Bound launch so the runtime window can hide when the player
     /// quits the game without ejecting media. Unsupervised sessions never enter
     /// this wait (empty tracked list returns immediately).
-    pub async fn wait_until_tracked_gone(
-        &self,
-        session_id: &SessionId,
-    ) -> Result<(), DomainError> {
+    pub async fn wait_until_tracked_gone(&self, session_id: &SessionId) -> Result<(), DomainError> {
         let poll = Duration::from_millis(500);
         loop {
             let tracked = {
